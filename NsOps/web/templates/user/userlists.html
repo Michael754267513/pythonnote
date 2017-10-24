@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% load my_filter %}
+    <table border="2">
+        {% for item in userlist %}
+        <tr>
+            <td>{{ item.id | upa }}</td>
+            <td>{{ item.Name| test }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

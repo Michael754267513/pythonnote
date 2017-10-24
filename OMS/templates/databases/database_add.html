@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>添加数据库</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'dbs_list' %}">MySQL</a>
+                </li>
+
+                <li class="{{ var8 }}">
+                    <strong>添加数据库</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>添加数据库</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal">{% csrf_token %}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">业务组</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" id="id_s" name="s">
+                                        {% for item in s %}
+                                            <option value="{{ item.id }}">{{ item.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">实例名称</label>
+                            <div class="col-sm-10">
+                                 <input id="id_schema" name="schema" type="text" class="form-control" value="{{ dbs.schema }}" />
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">实例别名</label>
+                            <div class="col-sm-10">
+                                 <input id="id_alias_name" name="alias_name" type="text" class="form-control"
+                                        value="{{ dbs.alias_name }}" />
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">数据库地址</label>
+                            <div class="col-sm-10">
+                                 <input id="id_ip_address" name="ip_address" type="text" class="form-control"
+                                        value="{{ dbs.ip_address }}" />
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">端口</label>
+                            <div class="col-sm-10">
+                                 <input id="id_port" name="port" type="text" class="form-control"
+                                        value="{{ dbs.port }}" />
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">实例用户</label>
+                            <div class="col-sm-10">
+                                 <input id="id_schema_user" name="schema_user" type="text" class="form-control"
+                                        value="{{ dbs.schema_user }}" />
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">实例用户密码</label>
+                            <div class="col-sm-10">
+                                 <input id="id_schema_pass" name="schema_pass" type="text" class="form-control"
+                                        value="{{ dbs.schema_pass }}" />
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">游戏分区</label>
+                                <div class="col-sm-10">
+                                    <div class="col-lg-4 m-l-n div_left">
+                                        <select class="form-control" multiple="multiple" id="id_zones", name="target_zones">
+                                            {% for zone in zones %}
+                                                <option value="{{ zone.id }}">{{ zone.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg-4 m-l-n div_right">
+                                        <select class="form-control" multiple="multiple" id="select_list" name="zones">
+                                            {% for zone in dbs.zones.all %}
+                                                <option selected value="{{ zone.id }}">{{ zone.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white" type="submit">取消</button>
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content2 %}
+    <script>
+	    $(function(){
+		    //点击添加将左边多选选中的添加至右边
+			$(".add").click(function(){
+			    var get_more = $(".div_left :selected");
+				//循环写入右边框中
+				get_more.each(function(){
+                    $("#select_list").append(this);
+				})
+
+			})
+			//双击左边框单选添加至右边
+	     	$('#id_zones').dblclick(function(){
+			    var get_one = $(this).find("option:selected");
+				$("#select_list").append(get_one);
+			});
+			//双击右边框中选项，则删除该项,并复原到左边
+			$('#select_list').dblclick(function(){
+			    var del_one = $(this).find("option:selected");
+				$('#id_zones').append(del_one);
+			});
+		})
+	</script>
+{% endblock %}
+

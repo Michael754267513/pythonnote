@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>users</title>
+    <script type="text/javascript" src="/static/jquery-3.1.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/body.css" media="screen" />
+</head>
+<body>
+    {% if username %}
+    上午好 <font color="#00FF00">{{ username }}</font>用户所属组<font color="#0000CC">{{ role }}</font>
+    {% endif %}
+    <form name="input" action="/add_users" method="POST">
+        Username: <input type="text" name="username">Password: <input type="password" name="password">
+        电话号码: <input type="text" name="tel">邮箱: <input type="text" name="mail">
+        <input type="submit" value="确认">
+    </form>
+    <form name="input" action="/select_user" method="POST">
+        Username: <input type="text" name="username">
+        <input type="submit" value="查询">
+    </form>
+    <form name="input" action="/update_user" method="POST">
+        Username: <input type="text" name="username">
+        <input type="submit" value="修改">
+    </form>
+     <form name="input" action="/del_user" method="POST">
+        Username: <input type="text" name="username">
+        <input type="submit" value="删除">
+    </form>
+<button id="listbtn" type="button">显示用户列表</button>
+<table border="1" id="tab">
+    <tr class="tr">
+        <th>用户名</th>
+        <th>电话号码</th>
+        <th>邮箱</th>
+        <th>角色</th>
+        <th>用户状态</th>
+    </tr>
+        {% for user in data %}
+        <tr>
+            <td>{{ user["用户名"] }}</td>
+            <td>{{ user["电话号码"] }}</td>
+            <td>{{ user["邮箱地址"] }}</td>
+            <td>{{ user["角色"] }}</td>
+            <td>{{ user["用户状态"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    _____________________________________________________________________________
+    <script>
+$(document).ready(function(){
+    $("#lists").click(function () {
+         $("#lists").toggle();
+    })
+    $("#listbtn").click(function () {
+        $("#lists").toggle();
+    })
+  $("p").click(function(){
+    $(this).hide();
+  });
+   $("#hide").click(function () {
+       $("p").hide(500);
+   }) ;
+    $("#show").click(function () {
+        $("p").show(500);
+    });
+    $("#dubbo").click(function () {
+        $("p").toggle(500);
+    });
+    $("#drdc").click(function () {
+        $("p1").fadeToggle(500)
+        $("p2").fadeTo(0.01)
+    })
+    $("#panelb").click(function () {
+        $("div").slideToggle(500)
+    });
+    $("#alt").click(function () {
+        alert("this is alter message" +" "+ $("#alt").text());
+    })
+    $("#bnt1").click(function () {
+        $("#username").val("{{data}}")
+    })
+
+});
+</script>
+<form id="test">
+    Username: <input id="username" type="text" name="username" >
+</form>
+    <button id="bnt1" type="button">check</button>
+<p>aaaaaaaaaaa</p>
+    <!--显示隐藏-->
+<button id="hide" type="button">隐藏</button>
+<button id="show" type="button">展示</button>
+<button id="dubbo" type="button">双显</button>
+    <form>
+<!-- 淡入淡出-->
+<p1>淡入淡出不推塔</p1>
+<font color="#00FFFF"><p2>淡入淡出不推塔</p2></font>
+        </form>
+<form>
+<button id="drdc" type="button" value="aaaaa">淡入淡出</button>
+</form>
+<!-- 滑动效果 -->
+<style type="text/css">
+div.panel,p.flip
+{
+margin:0px;
+padding:5px;
+text-align:center;
+background:#e5eecc;
+border:solid 1px #c3c3c3;
+}
+div.panel
+{
+height:120px;
+display:none;
+}
+</style>
+<div class="panel1">
+    <p3>Michael</p3>
+    <p4>Mihclae 滑动效果</p4>
+</div>
+<p5><a href="/edit_user?aaa" id="att"> Michael</a></p5>
+<button id="panelb" type="button">滑动</button>
+<button id="alt" type="button">alter</button>
+</body>
+</html>

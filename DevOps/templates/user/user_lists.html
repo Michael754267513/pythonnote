@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'nav_cat_bar.html' %}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5> 查看用户 </h5>
+                    <div class="ibox-tools">
+                        <a class="collapise-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="">
+                        <a href="/user/user_add" class="btn btn-sm btn-primary "> 添加用户 </a>
+                        <a id="del_btn" class="btn btn-sm btn-danger "> 删除所选 </a>
+                        <form id="search_form" method="get" action="/user/user_search" class="pull-right mail-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" id="search_input" name="keyword" placeholder="Search">
+                                <div class="input-group-btn">
+                                    <button id='search_btn' type="submit" class="btn btn-sm btn-primary">
+                                        -搜索-
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <table class="table table-striped table-bordered table-hover " id="editable" >
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    <input type="checkbox" id="check_all" onclick="checkAll('check_all', 'checked')">
+                                </th>
+                                <th class="text-center">姓名</th>
+                                <th class="text-center">电话</th>
+                                <th class="text-center">权限</th>
+                                <th class="text-center">邮箱</th>
+                                <th class="text-center">状态</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr class="gradeX">
+                                <td class="text-center">
+                                    <input type="checkbox" name="checked" value="{{ user.id }}">
+                                </td>
+                                <td class="text-center"><a href="/user/detail?id={{ user.id }}">{{ user.name }}</a></td>
+                                <td class="text-center"> {{ user.phone }} </td>
+                                <td class="text-center"> {{user.role}}</td>
+                                <td class="text-center"> {{ user.mail }}</td>
+                                <th class="text-center">{{ user.status  }}</th>
+                                </td>
+                                <td class="text-center">
+                                    <a href="/user/user_edit?id={{ user.id }}" class="btn btn-xs btn-info">编辑</a>
+                                    <a value="/user/user_del?id={{ user.id }}" class="btn btn-xs btn-danger del {% if user.name == 'laoshu' %} disabled {% endif %}">删除</a>
+                                    <a value="/user/user_lock?id={{ user.id }}" class="btn btn-xs btn-danger lock {% if user.status == '可用' %} disabled {% endif %}">解锁</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="dataTables_info" id="editable_info" role="status" aria-live="polite">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block self_head_css_js %}
+    <script src="/static/js/jquery.shiftcheckbox.js"></script>
+{% endblock %}
+{% block self_footer_js %}
+<script>
+    $(document).ready(function(){
+        $('.del').click(function(){
+            var row = $(this).closest('tr');
+            if (confirm("确定删除")) {
+            $.get(
+                    $(this).attr('value'),
+                    {},
+                    function(data){
+                        row.remove();
+                        alert(data);
+                    }
+            )}
+        })
+        $('.lock').click(function(){
+            var row = $(this).closest('tr');
+            if (confirm("确定锁定")) {
+            $.get(
+                    $(this).attr('value'),
+                    {},
+                    function(data){
+                        row.value("aaa")
+                        alert(data);
+                    }
+            )}
+        })
+
+        $('#del_btn').click(function(){
+            var check_array = [];
+            if (confirm("确定删除")) {
+                $(".gradeX input:checked").each(function() {
+                    check_array.push($(this).attr("value"))
+                });
+                console.log(check_array.join(","));
+                $.post("/user/user_del",
+                        {id: check_array.join(",")},
+                        function(data){
+                            $(".gradeX input:checked").closest("tr").remove();
+                            alert(data);
+                        }
+                )
+            }
+
+        });
+
+
+
+        $("tbody tr").shiftcheckbox({
+            checkboxSelector: 'input:checkbox',
+            selectAll: $('#select_all'),
+            ignoreClick: 'a'
+        });
+        $('.shiftCheckbox').shiftcheckbox();
+    });
+
+
+</script>
+{% endblock %}

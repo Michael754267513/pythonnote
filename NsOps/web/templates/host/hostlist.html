@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form name="input" action="/hosts/list" method="GET">
+       地址搜索:<input type="text" name="ip">
+      <input type="submit" value="搜索">
+    </form>
+    <table border="0.2" id="table-1">
+        <tr>
+            <td>ip地址</td>
+            <td>用户组</td>
+            <td>主机组</td>
+        </tr>
+        {% for item in iplist %}
+        <tr>
+            <td>{{ item.ip  }}</td>
+            <td>{{ item.ug.GroupName }}</td>
+            <td>{{ item.hg.hg  }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+<div class="pagination">
+				<ul>
+					<li>
+						<a href="#">上一页</a>
+					</li>
+                    {% for item in pagecount %}
+					<li>
+						<a href="/host/list?={{ item }}">{{ item }}</a>
+					</li>
+                    {% endfor %}
+					<li>
+						<a href="#">下一页</a>
+					</li>
+				</ul>
+</div>
+
+{% endblock %}

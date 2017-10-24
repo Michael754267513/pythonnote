@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>概要</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li class="{{ var }}">
+                    <strong>仪表盘</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight" id="keyManager">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content text-center p-md">
+
+                        <h2><span class="text-navy">OMS - 运维集中化管理平台</span>
+                        saltstack功能 <br/>运维可以通过此平台实现简单的集中化管理</h2>
+
+                        <p>
+                             Salt，,一种全新的基础设施管理方式，部署轻松，在几分钟内可运行起来，扩展性好，
+                            很容易管理上万台服务器，速度够快，服务器之间秒级通讯。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Salt Key管理</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div>
+                                <canvas id="doughnutChart" value="{{ key_list1 }}" height="140"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Salt Key管理</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div>
+                                <canvas id="doughnutChart1" value="{{ key_list2 }}" height="140"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Accept minions</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover dataTables-example"
+                                       id="minion_list" >
+                                    <thead>
+                                    <tr>
+                                        <th>minion</th>
+                                        <th>指纹</th>
+                                        <th>操作时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in minions_object %}
+                                            <tr class="gradeX">
+                                                <td>{{ item.minion }}</td>
+                                                <td>{{ item.finger |  safe | truncatewords_html:10}}</td>
+                                                <td>{{ item.timestamp | date:'Y-m-d' }}</td>
+                                                <td>
+                                                    <a href="javascript:void(0);" class="btn btn-danger delete">删除</a>
+                                                    {% ifequal item.get_type_display 'master' %}
+                                                        <a href="javascript:void(0);" class="btn btn-info sync">同步grains</a>
+                                                    {% endifequal %}
+                                                    {% if item.is_getinfo %}
+                                                    <a href ="javascript:return false;" class="btn btn-default disabled">获取信息</a>
+                                                    {% else %}
+                                                    <a href="javascript:void(0);" class="btn btn-info get_info">获取信息</a>
+                                                    {% endif %}
+                                                    {% if item.is_push_scripts %}
+                                                    <a href="javascript:void(0);" class="btn btn-default disabled">部署脚本</a>
+                                                    {% else %}
+                                                    <a href="javascript:void(0);" class="btn btn-primary push_agent">部署脚本</a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>minion</th>
+                                        <th>指纹</th>
+                                        <th>操作时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Unaccepted minions</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover dataTables-example"
+                                       id="minion_list" >
+                                    <thead>
+                                    <tr>
+                                        <th>minion</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for minion in minions_pre %}
+                                            <tr class="gradeX">
+                                                <td>{{ minion }}</td>
+                                                <td>
+                                                    <a href="javascript:void(0);" class="btn btn-info agree">接受</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>minion</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <style>
+    #deletWrap{
+        width:200px;
+        height:100px;
+        display: none;
+        background-color:rgba(200,200,200,0.8);
+        position: fixed;top:50%;left:50%;
+        z-index: 600;
+        margin: -75px 0 0 -150px;
+        border-radius: 5px;
+        border: 2px solid rgba(255,0,0,.8)
+    }
+
+    #explain{
+        text-align: center;
+        font-size: 15px;
+        padding: 10px;
+        margin-top: 10px;
+
+    }
+    #deletWrap a{
+        display:block;
+        width: 50px;
+        padding: 5px 0;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        margin: 10px 35%;}
+
+    #deletWrap a:hover
+    {
+        color: yellow;
+    }
+    </style>
+
+</div>
+{% endblock %}
+
+{% block content2 %}
+    <!-- ChartJS-->
+    <script src="/static/js/plugins/chartJs/Chart.min.js"></script>
+    <script src="/static/js/demo/saltstack-key-manager.js"></script>
+
+{% endblock %}

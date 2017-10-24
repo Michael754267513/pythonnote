@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form name="input" action="/hosts/add" method="POST">
+        ip地址:<input type="text" name="ip"><br>
+            <input type="radio" name="hg_id" value="1">pc
+            <input type="radio" name="hg_id" value="2"  checked>mobile
+            <input type="radio" name="hg_id" value="3">soa<br>
+            <input type="radio" name="ug_id" value="1">管理员
+            <input type="radio" name="ug_id" value="2" checked>guest<br>
+        <input type="submit" value="提交">
+</form>
+
+{% endblock %}

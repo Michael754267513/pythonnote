@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>编辑用户</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'group_list' %}">用户管理</a>
+                </li>
+                <li class="{{ var2 }}">
+                    <strong>编辑用户</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>编辑用户 </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">修改密码</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal">{% csrf_token %}
+                        <div class="form-group">
+                            {{ form.as_p }}
+                            <input type="submit" value="Submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

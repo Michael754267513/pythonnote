@@ -1,0 +1,60 @@
+/*表单样式*/
+#table-1 thead, #table-1 tr {
+border-top-width: 1px;
+border-top-style: solid;
+border-top-color: rgb(230, 189, 189);
+}
+#table-1 {
+border-bottom-width: 1px;
+border-bottom-style: solid;
+border-bottom-color: rgb(230, 189, 189);
+}
+
+/* Padding and font style */
+#table-1 td, #table-1 th {
+padding: 5px 10px;
+font-size: 12px;
+font-family: Verdana;
+color: rgb(177, 106, 104);
+}
+
+/* Alternating background colors */
+#table-1 tr:nth-child(even) {
+background: rgb(238, 211, 210)
+}
+#table-1 tr:nth-child(odd) {
+background: #FFF
+}
+        #wrapper {
+             width: 100%;
+             overflow-x: hidden;
+        }
+        #page-wrapper2 {
+            float: right;
+            width: 80%;
+             min-height: 568px;
+             position: relative !important;
+        }
+         #page-wrapper {
+             float: left;
+             width: 20%;
+             min-height: 568px;
+             position: relative !important;
+        }
+        .gray-bg {
+             background-color: #f3f3f4;
+        }
+/*分页*/
+.pagination {
+    margin: 20px 0;
+}
+.pagination ul {
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: inline-block;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+.pagination ul > li {
+    display: inline;
+}

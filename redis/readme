@@ -1,0 +1,31 @@
+https://segmentfault.com/a/1190000003748930
+1  aof.last_rewrite_time      上次rewrite操作使用的时间(单位s)
+2  aof.rewrite        rewrite 的次数
+3  clients.biggest_input_buf     当前客户端连接的最大输入缓存
+4  clients.blocked    被阻塞的客户端数
+5  clients.longest_output_list   当前客户端连接的最大输出列表    
+6  cpu.sys       系统cpu
+7  cpu.sys_children    后台进程的sys cpu使用率
+8  cpu.user      redis server的user cpu使用率
+9  cpu.user_children    后台进程的user cpu使用率 
+10 info.latency_ms    Redis 服务器响应延迟措施所花费的平均时间
+11  keys.evicted  因为内存大小限制，而被驱逐出去的键的个数
+12  keys.expired   自启动起过期的key的总数
+13  mem.fragmentation_ratio      used_memory_rss/used_memory比例，一般情况下，used_memory_rss略高于used_memory，当内存碎片较多时，则mem_fragmentation_ratio会较大，可以反映内存碎片是否很多
+14  mem.lua   lua引擎使用的内存
+15  mem.peak   内存使用的峰值大小
+16  mem.rss   系统给redis分配的内存（即常驻内存）
+17  mem.used   使用内存，单位B
+18  net.clients            连接的客户端数
+19  net.commands     每秒运行命令数
+20  net.rejected         因为最大客户端连接数限制，而导致被拒绝连接的个数
+21  net.slaves            连接的从库数
+22  perf.latest_fork_usec    上次的fork操作使用的时间（单位ms）
+23  pubsub.channels      当前使用中的频道数量／ 发布/订阅频道数
+24  pubsub.patterns       当前使用的模式的数量／ 发布/订阅模式数
+25  rdb.bgsave          通过子进程来进行数据持久化
+26  rdb.changes_since_last   自上次dump后rdb的改动
+27  rdb.last_bgsave_time       上次save的时间戳
+28  replication.master_repl_offs     全局的数据同步偏移量
+29  stats.keyspace_hits      在main dictionary(todo)中成功查到的key个数
+30  stats.keyspace_misses     在main dictionary(todo)中未查到的key的个数

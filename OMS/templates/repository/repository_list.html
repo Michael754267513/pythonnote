@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>仓库管理</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li class={{ var6 }}>
+                    <strong>仓库管理</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <!--<h5>Basic Data Tables example with responsive plugin</h5>-->
+                        <a href="{% url 'repository_add' %}" class="btn btn-primary">添加仓库</a>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTables-example"
+                                   id="repo_list" >
+                                <thead>
+                                <tr>
+                                    <!--<th>多选</th>-->
+                                    <th>仓库名</th>
+                                    <th>仓库用户</th>
+                                    <th>仓库地址</th>
+                                    <th>仓库类型</th>
+                                    <th>使用协议</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in repo_list %}
+                                        <tr class="gradeX">
+                                            <td>{{ item.repo_name }}</td>
+                                            <td>{{ item.repo_user }}</td>
+                                            <td>{{ item.repo_address }}</td>
+                                            <td>{{ item.get_repo_type_display }}</td>
+                                            <td>{{ item.get_repo_protocol_display }}</td>
+                                            <td>
+                                                <a class="btn btn-info" href="{% url "repository_edit" item.id %}">编辑</a>
+                                                <a href="javascript:void(0);" deleteId="{{ item.id }}" class="btn btn-danger">删除</a>
+                                                <a class="btn btn-primary" href="{% url 'repository_detail' item.id %}">详情</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <!--<th>多选</th>-->
+                                    <th>仓库名</th>
+                                    <th>仓库用户</th>
+                                    <th>仓库地址</th>
+                                    <th>仓库类型</th>
+                                    <th>使用协议</th>
+                                    <th>操作</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

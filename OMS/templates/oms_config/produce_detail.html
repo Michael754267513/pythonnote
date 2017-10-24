@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>生成文件详情</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li class="{{ var }}">
+                    <strong><a href="#">系统设置</a></strong>
+                </li>
+                <li class="{{ var4 }}">
+                    <strong>生成文件详情</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+{#                                        <a href="{% url '_edit'  %}" class="btn btn-white btn-xs pull-right">编辑</a>#}
+                                        <h2>生成文件详情</h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt><dd><span class="label label-primary">可用</span></dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>业务组:</dt> <dd>{{ produces.s.name }}</dd>
+                                        <dt>游戏分区:</dt>
+                                        {% for item in produces.zones.all %}
+                                        <dd>{{ item.name }}</dd>
+                                        {% endfor %}
+                                        <dt>源文件:</dt> <dd>{{ produces.config_file }}</dd>
+                                        <dt>生成文件:</dt> <dd>{{ produces.generate_path }}</dd>
+                                        <dt>公司:</dt> <dd><a href="#" class="text-navy"> Leshu Company</a> </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-lg-7" id="cluster_info">
+                                    <dl class="dl-horizontal" >
+
+{#                                        <dt>最近编辑:</dt> <dd>16.08.2014 12:15:57</dd>#}
+                                        <dt>创建时间:</dt> <dd>{{ produces.create_time | date:'Y-m-d H:i:s' }}</dd>
+                                    </dl>
+                                </div>
+
+{#                                <div class="row">#}
+{#                                    <div class="col-lg-12">#}
+{#                                        <dl class="dl-horizontal">#}
+{#                                            <dt>Completed:</dt>#}
+{#                                            <dd>#}
+{#                                                <div class="progress progress-striped active m-b-sm">#}
+{#                                                    <div style="width: 100%;" class="progress-bar"></div>#}
+{#                                                </div>#}
+{#                                                <small>项目组设置完成度<strong>100%</strong></small>#}
+{#                                            </dd>#}
+{#                                        </dl>#}
+{#                                    </div>#}
+{#                                </div>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-lg-3">
+                <div class="wrapper wrapper-content project-manager">
+                    <h4>描述</h4>
+{#                    <img src="img/zender_logo.png" class="img-responsive">#}
+                    <p class="small">
+                        替换模板文件中(两个{}包含)变量，生成新的文件，供saltstack推送至目标服务器
+                    </p>
+                    <p class="small font-bold">
+                        <span><i class="fa fa-circle text-warning"></i> High priority</span>
+                    </p>
+                    <h5>游戏分区名</h5>
+                    <ul class="tag-list" style="padding: 0">
+                        <li><a href=""><i class="fa fa-tag">
+                            {% for item in produces.zones.all %}
+                            {{ item.name }}
+                            {% endfor %}
+                        </i></a></li>
+                    </ul>
+{#                    <h5>Project files</h5>#}
+{#                    <ul class="list-unstyled project-files">#}
+{#                        <li><a href=""><i class="fa fa-file"></i> Project_document.docx</a></li>#}
+{#                        <li><a href=""><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>#}
+{#                        <li><a href=""><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>#}
+{#                        <li><a href=""><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>#}
+{#                    </ul>#}
+{#                    <div class="text-center m-t-md">#}
+{#                        <a href="#" class="btn btn-xs btn-primary">Add files</a>#}
+{#                        <a href="#" class="btn btn-xs btn-primary">Report contact</a>#}
+{##}
+{#                    </div>#}
+                </div>
+            </div>
+    </div>
+
+{% endblock %}
+
+

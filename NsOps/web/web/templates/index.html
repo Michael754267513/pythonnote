@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ops</title>
+</head>
+<body>
+    {% load my_filter %}
+    {% load filter_shit %}
+    <h1>{{dir.0}}</h1>
+    <h2>{{name | test }}</h2>
+    <h3>{{age | title}}</h3>
+    <h3>{{phone}}</h3>
+    <h4>{{memory}}</h4>
+
+    {% if not dir %}
+        <h1>aaaaaaaaaaa</h1>
+    {% endif %}
+    {% for k,v in dir.items %}
+        <li>{{ forloop.counter }}</li>
+        <li>{{k}}:{{v}}</li>
+        <li>{{ forloop.first }}</li>
+        <li>{{ forloop.last }}</li>
+    {% endfor %}
+    <h1>{{computer}}</h1>
+    {% for p in computer %}
+        <li>{{p}}</li>
+    {% endfor %}
+</body>
+</html>

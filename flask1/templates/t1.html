@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="/static/jquery-3.1.1.js"></script>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script>
+       function demo() {
+            ele=document.getElementById("demo").innerText
+            if (ele.match("aaaa")){
+                 document.getElementById("demo").innerText="asdad";
+            }
+            else{
+                document.getElementById("demo").innerText="aaaa";
+            }
+        }
+        function text() {
+            var age = "";
+            ele = document.getElementById("text").value
+            if (!isNaN(ele)) {
+                   ele = parseInt(ele)
+                  if ( ele <= 18 ) {
+                    age = "小于18"
+                }
+                 else if (ele <= 48) {
+                    age = "大于18小于48"
+                }
+                else {
+                    age = "大于48"
+                }
+                alert(age)
+            } else {
+                alert("不是数字");
+            }
+        }
+        function sw() {
+            ele = document.getElementById("switch").value
+            switch (ele){
+                case "1":
+                    alert("a");
+                    break;
+                case "2":
+                    alert("b");
+                    break;
+                default:
+                    alert("default");
+                    break;
+            }
+        }
+        function loadXMLDoc() {
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("test").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","http://www.ziqiangxuetang.com/demo/ajax/ajax_info.txt",true);
+xmlhttp.send();
+}
+	    function btn02(){
+		    $.get("/ajax/btn02",function(data,status){
+			    alert("数据: " + data + "\n状态: " + status);
+		});
+	}
+	    function ajax_post() {
+            nametxt = document.getElementById("ajax_name").value
+            n1 = $(this).attr('value')
+            $.post("/ajax/btn02", {
+                name: n1
+            }, function (data, status) {
+                alert("数据: " + data + "\n状态: " + status);
+            })
+        }
+         /* $(document).click(function (e) {
+        var v_id = $(e.target).attr('id');
+            // alert(v_id)
+        } )*/
+        $(document).ready(function(){
+            $("#test").click(function () {
+                alert("aaa")
+            })
+            $("#ajaxGetName").click(function(){
+                $.ajax({
+                    url:"/ajax/btn02",
+                    type:"GET",
+                    context:document.body,
+                    data:"&name=" + $("#ajaxName").val(),
+                    complete:function(data) {
+                        if (data.readyState === 4) {
+                            if (data.status === 200) {
+                                alert(data.responseText)
+                            }
+                        }
+                    },
+                     error:function(data){
+                         alert("状态:" + data.status)
+                    }
+                })
+            })
+            $("#ajaxName").blur(function(){
+                $.ajax({
+                    url:"/ajax/btn02",
+                    type:"GET",
+                    context:document.body,
+                    data:"&name=" + $("#ajaxName").val(),
+                    success: function(data) {
+                        if (data.readyState === 4) {
+                            if (data.status === 200) {
+                                alert(data.responseText)
+                                $("#ajax_t").text(data.responseText)
+                            }
+                        }
+                    },
+                     error: function(data){
+                         alert("状态:" + data.status)
+                    },
+                })
+            })
+            })
+    </script>
+</head>
+<body>
+<h1 id="demo"  onclick="demo()">aaaaaa</h1>
+<input id="text" type="text" onclick="text()">
+<input id="switch" type="text" onclick="sw()">
+<button type="button" onclick="loadXMLDoc()">修改内容</button>
+<button onclick="btn02()" type="button"  >AJAX GET</button>
+<br>
+<input id="ajax_name" type="text"><p id="test"></p>
+<button onclick="ajax_post()" type="button" id="aaa"  value="AJAX POST">AJAX GET</button><br>
+<input id="ajaxName" type="text"><p id="ajax_t"></p>
+<button id="ajaxGetName" type="button" value="AjaxGET">AjaxGET</button>
+</body>
+</html>

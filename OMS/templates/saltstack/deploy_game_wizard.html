@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>开服引导</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'salt_key_manager' %}">saltstack</a>
+                </li>
+                <li class="{{ var7 }}">
+                    <strong>开服引导</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>游戏开服引导</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <h2>
+                            游戏开服引导表单
+                        </h2>
+                        <p>
+                            一步一步配置部署游戏开服
+                        </p>
+                        <form id="form" action="#" method="POST" class="wizard-big">{% csrf_token %}
+                                <h1>开服所用信息</h1>
+                                <fieldset>
+                                    <h2>开服所用信息</h2>
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="form-group">
+                                                <label>游戏分区 *</label>
+                                                <select class="form-control required" id="id_zones" name="zones">
+                                                    <option value="">-------------------------</option>
+                                                    {% for zone in zones %}
+                                                        <option value="{{ zone.id }}">{{ zone.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>游戏域名 *</label>
+                                                <select class="form-control required" id="id_domain" name="domain">
+                                                    <option value="">-------------------------</option>
+                                                    {% for domain in domains %}
+                                                        <option value="{{ domain.id }}">{{ domain.zones.name }}|{{ domain.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>选择War服务器 *</label>
+                                                <select class="form-control required" id="id_war_servers" name="war_servers">
+                                                    <option value="">-------------------------</option>
+                                                    {% for server in war_servers %}
+                                                        <option value="{{ server.id }}">{{ server.alias_name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>选择mysql服务器 *</label>
+                                                <select class="form-control required" id="id_db_server" name="db_server">
+                                                    <option value="">-------------------------</option>
+                                                    {% for db in db_servers %}
+                                                        <option value="{{ db.id }}">{{ db.schema }}|{{ db.ip_address }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>选择聊天服务器 *</label>
+                                                <select class="form-control required" id="id_chat_servers" name="chat_servers">
+                                                    <option value="">-------------------------</option>
+                                                    {% for chat in chat_servers %}
+                                                        <option value="{{ chat.id }}">{{ chat.alias_name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>游戏ID *</label>
+                                                <input id="id_server_id" name="server_id" type="text" class="form-control required">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>腾讯ID *</label>
+                                                <input id="id_tx_id" name="tx_id" type="text" class="form-control required">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="text-center">
+                                                <div style="margin-top: 20px">
+                                                    <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                                <h1>web应用服务器相关信息</h1>
+                                <fieldset>
+                                    <h2>从git直接获取代码至目标服务器指定路径下</h2>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>web应用服务器 *</label>
+                                                <select class="form-control required" id="id_web_servers" name="web_servers">
+                                                    <option value="">-------------------------</option>
+                                                    {% for server in web_servers %}
+                                                        <option value="{{ server.id }}">{{ server.alias_name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>执行模块 *</label>
+                                                <select class="form-control required" id="id_fun" name="fun">
+                                                        <option value="1">git.clone</option>
+                                                        <option value="2">git.pull</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>部署路径 *</label>
+                                                <select class="form-control required" id="id_deploy_path" name="deploy_path">
+                                                    <option value="">-------------------------</option>
+                                                    {% for item in path_object %}
+                                                        <option value="{{ item.id }}">{{ item.path_value }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="text-center">
+                                                <div style="margin-top: 20px">
+                                                    <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+
+                                <h1>共用WarServer的相关信息</h1>
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input id="id_merge" name="merge" type="checkbox">
+                                        <label>是否与其他服共用WarServer</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>共用WarServer服务的区号</label>
+                                        <select class="form-control" id="id_previous_zone" name="previous_zone">
+                                            <option value="">-------------------------</option>
+                                            {% for item in zones %}
+                                                <option value="{{ item.id }}">{{ item.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                </fieldset>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content2 %}
+    <!-- Steps -->
+    <script src="/static/js/plugins/staps/jquery.steps.min.js"></script>
+
+    <!-- Jquery Validate -->
+    <script src="/static/js/plugins/validate/jquery.validate.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#wizard").steps();
+            $("#form").steps({
+                bodyTag: "fieldset",
+                onStepChanging: function (event, currentIndex, newIndex)
+                {
+                    // Always allow going backward even if the current step contains invalid fields!
+                    if (currentIndex > newIndex)
+                    {
+                        return true;
+                    }
+
+                    // Forbid suppressing "Warning" step if the user is to young
+                    if (newIndex === 3 && Number($("#age").val()) < 18)
+                    {
+                        return false;
+                    }
+
+                    var form = $(this);
+
+                    // Clean up if user went backward before
+                    if (currentIndex < newIndex)
+                    {
+                        // To remove error styles
+                        $(".body:eq(" + newIndex + ") label.error", form).remove();
+                        $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
+                    }
+
+                    // Disable validation on fields that are disabled or hidden.
+                    form.validate().settings.ignore = ":disabled,:hidden";
+
+                    // Start validation; Prevent going forward if false
+                    return form.valid();
+                },
+                onStepChanged: function (event, currentIndex, priorIndex)
+                {
+                    // Suppress (skip) "Warning" step if the user is old enough.
+                    if (currentIndex === 2 && Number($("#age").val()) >= 18)
+                    {
+                        $(this).steps("next");
+                    }
+
+                    // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
+                    if (currentIndex === 2 && priorIndex === 3)
+                    {
+                        $(this).steps("previous");
+                    }
+                },
+                onFinishing: function (event, currentIndex)
+                {
+                    var form = $(this);
+
+                    // Disable validation on fields that are disabled.
+                    // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
+                    form.validate().settings.ignore = ":disabled";
+
+                    // Start validation; Prevent form submission if false
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex)
+                {
+                    var form = $(this);
+
+                    // Submit form input
+                    form.submit();
+                }
+            }).validate({
+                        errorPlacement: function (error, element)
+                        {
+                            element.before(error);
+                        },
+                        rules: {
+                            confirm: {
+                                equalTo: "#password"
+                            }
+                        }
+                    });
+       });
+    </script>
+{% endblock %}

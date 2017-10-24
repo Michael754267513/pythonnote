@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'nav_cat_bar.html' %}
+ <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>填写基本信息</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form method="post" id="userForm" class="form-horizontal" action="">
+                            {% if error %}
+                                <div class="alert alert-warning text-center">{{ error }}</div>
+                            {% endif %}
+                            {% if msg %}
+                                <div class="alert alert-success">{{ msg | safe }}</div>
+                            {% endif %}
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 control-label">用户名<span class="red-fonts">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="name" name="name" placeholder="Name" type="text" class="form-control" {% if error %}value="{{ name }}" {% endif %} >
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 control-label">密码<span class="red-fonts">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="password" name="password" placeholder="密码" type="password" class="form-control" {% if error %}value="{{ username }}" {% endif %}>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label for="tel" class="col-sm-2 control-label">电话号码<span class="red-fonts">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="tel" name="tel" placeholder="电话号码" type="text" class="form-control" {% if error %}value="{{ tel }}" {% endif %}>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                <label for="email" class="col-sm-2 control-label">Email<span class="red-fonts">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="email" name="mail" type="email" placeholder="michael134@qq.com" class="form-control" {% if error %}value="{{ email }}" {% endif %}>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label for="role" class="col-sm-2 control-label">权限<span class="red-fonts">*</span></label>
+                                <div class="col-sm-8">
+                                    <div class="col-sm-3">
+                                        <div class="radio i-checks">
+                                            <label><input type="radio" value="SA" class="role" name="role">SA</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="radio i-checks">
+                                            <label><input type="radio" value="Test" class="role" name="role" checked>Test</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group"><label class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-2">
+                                    <div class="checkbox i-checks">
+                                        <label><input type="radio" value="1" name="status" checked>禁用 </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="checkbox i-checks">
+                                        <label><input type="radio" value="0" name="status" >激活 </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-white" type="reset">取消</button>
+                                    <button id="submit_button" class="btn btn-primary" type="submit">确认保存</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block self_footer_js %}
+
+<script>
+$('#userForm').validator({
+    timely: 2,
+    theme: "yellow_right_effect",
+    rules: {
+        check_name: [/(?!^root$)^[\w.]{2,20}$/i, '大小写字母数字和下划线小数点,2-20位,并且非root'],
+        check_username: [/^[\w.]{3,20}$/, '大小写字母数字和下划线小数点'],
+        type_m: function(element){
+                    return  $("#M").is(":checked");
+            }
+    },
+    fields: {
+        "password": {
+            rule: "required;length[6~50]",
+            tip: "输入密码",
+            ok: "",
+            msg: {required: "必须填写!"}
+        },
+        "username": {
+            rule: "required",
+            tip: "姓名",
+            ok: "",
+            msg: {required: "必须填写"}
+        },
+        "email": {
+            rule: "required",
+            tip: "Email",
+            ok: "",
+            msg: {required: "必须填写"}
+        },
+        "tel": {
+            rule: "required",
+            tip: "phone",
+            ok: "",
+            msg: {required: "必须填写"}
+
+        }
+
+
+    },
+    valid: function(form) {
+        form.submit();
+    }
+});
+
+{#$("document").ready(function(){#}
+{#    $("input.role").click(function(){#}
+{#        if($("input.role[value=GA]").is( ":checked" )){#}
+{#            $("#admin_groups").css("display", 'block');#}
+{#        }#}
+{#        else {#}
+{#            $("#admin_groups").css("display", 'none');#}
+{#        }#}
+{#    })#}
+{#})#}
+
+</script>
+{% endblock %}

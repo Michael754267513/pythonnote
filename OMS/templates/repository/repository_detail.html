@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>仓库详情</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li class="{{ var8 }}">
+                    <strong><a href="{% url 'dbs_list' %}">MySQL</a></strong>
+                </li>
+                <li class="{{ var8 }}">
+                    <strong>仓库详情</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+                                        <h2>仓库详情页</h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt><dd><span class="label label-primary">可用</span></dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>仓库名:</dt> <dd>{{ repository.repo_name }}</dd>
+                                        <dt>仓库地址:</dt> <dd>{{ repository.repo_address }}</dd>
+                                        <dt>仓库用户:</dt> <dd>{{ repository.repo_user }}</dd>
+                                        <dt>仓库密码:</dt> <dd>{{ repository.repo_pass }}</dd>
+                                        <dt>仓库类型:</dt> <dd>{{ repository.get_repo_type_display }}</dd>
+                                        <dt>传输协议:</dt> <dd>{{ repository.get_repo_protocol_display }}</dd>
+                                        <dt>公司:</dt> <dd><a href="#" class="text-navy"> Leshu Company</a> </dd>
+                                        <!--<dt>程序迭代版本:</dt> <dd> 	v1.4.2 </dd>-->
+                                    </dl>
+                                </div>
+{#                                <div class="col-lg-7" id="cluster_info">#}
+{#                                    <dl class="dl-horizontal" >#}
+{##}
+{#                                        <dt>用户名:</dt> <dd>{{ db_accounts.db_username }}</dd>#}
+{#                                        <dt>密码:</dt> <dd>{{ db_accounts.db_password }}</dd>#}
+{#                                        <dt>密码:</dt> <dd> 	10.07.2014 23:36:57 </dd>#}
+{#                                        <dt>Participants:</dt>#}
+{#                                        <dd class="project-people">#}
+{#                                        <a href=""><img alt="image" class="img-circle" src="img/a3.jpg"></a>#}
+{#                                        <a href=""><img alt="image" class="img-circle" src="img/a1.jpg"></a>#}
+{#                                        <a href=""><img alt="image" class="img-circle" src="img/a2.jpg"></a>#}
+{#                                        <a href=""><img alt="image" class="img-circle" src="img/a4.jpg"></a>#}
+{#                                        <a href=""><img alt="image" class="img-circle" src="img/a5.jpg"></a>#}
+{#                                        </dd>#}
+{#                                    </dl>#}
+{#                                </div>#}
+
+                                <!--<div class="row">
+                                    <div class="col-lg-12">
+                                        <dl class="dl-horizontal">
+                                            <dt>Completed:</dt>
+                                            <dd>
+                                                <div class="progress progress-striped active m-b-sm">
+                                                    <div style="width: 100%;" class="progress-bar"></div>
+                                                </div>
+                                                <small>项目组设置完成度<strong>100%</strong></small>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-lg-3">
+                <div class="wrapper wrapper-content project-manager">
+                    <h4>描述</h4>
+{#                    <img src="img/zender_logo.png" class="img-responsive">#}
+                    <p class="small">
+                        Mysql相关设置
+                    </p>
+                    <p class="small font-bold">
+                        <span><i class="fa fa-circle text-warning"></i> High priority</span>
+                    </p>
+                    <h5>项目标签</h5>
+                    <ul class="tag-list" style="padding: 0">
+                        <li><a href=""><i class="fa fa-tag"></i> {{ repository.repo_name }}</a></li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+
+{% endblock %}

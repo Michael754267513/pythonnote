@@ -1,0 +1,83 @@
+1504856841410	geckodriver	INFO	geckodriver 0.18.0
+1504856841420	geckodriver	INFO	Listening on 127.0.0.1:5119
+1504856843470	geckodriver::marionette	INFO	Starting browser C:\Program Files (x86)\Mozilla Firefox\firefox.exe with args ["-marionette"]
+1504856843919	addons.xpi	WARN	Error parsing extensions state: [Exception... "Component returned failure code: 0x80520012 (NS_ERROR_FILE_NOT_FOUND) [amIAddonManagerStartup.readStartupData]"  nsresult: "0x80520012 (NS_ERROR_FILE_NOT_FOUND)"  location: "JS frame :: resource://gre/modules/addons/XPIProvider.jsm :: loadExtensionState :: line 1596"  data: no] Stack trace: loadExtensionState()@resource://gre/modules/addons/XPIProvider.jsm:1596 < getInstallState()@resource://gre/modules/addons/XPIProvider.jsm:1631 < checkForChanges()@resource://gre/modules/addons/XPIProvider.jsm:3152 < startup()@resource://gre/modules/addons/XPIProvider.jsm:2246 < callProvider()@resource://gre/modules/AddonManager.jsm:271 < _startProvider()@resource://gre/modules/AddonManager.jsm:741 < startup()@resource://gre/modules/AddonManager.jsm:908 < startup()@resource://gre/modules/AddonManager.jsm:3122 < observe()@jar:file:///C:/Program%20Files%20(x86)/Mozilla%20Firefox/omni.ja!/components/addonManager.js:65
+1504856844362	Marionette	INFO	Enabled via --marionette
+[GPU 7992] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1504856846244	Marionette	INFO	Listening on port 5126
+1504856846306	Marionette	INFO	Listening on port 5126
+1504856846610	Marionette	WARN	TLS certificate errors will be ignored for this session
+1504856846672	Marionette	DEBUG	loaded listener.js
+1504856846701	Marionette	DEBUG	Received DOM event "beforeunload" for "about:blank"
+1504856846758	Marionette	DEBUG	Received DOM event "pagehide" for "about:blank"
+1504856846758	Marionette	DEBUG	Received DOM event "unload" for "about:blank"
+1504856846951	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "http://ui.ptlogin2.qq.com/cgi-bin/login?style=9&appid=30000101&low_login=0&hln_css=http%3A%2F%2Fmat1.gtimg.com%2Fgongyi%2Fm%2Fhtml5%2Flogo_login.png&s_url=http%3A%2F%2Fssl.gongyi.qq.com%2Fm%2Fweixin%2Fyqj_main.html%3Fid%3D415%26did%3D1214042801201708224500020050%26ADTAG%3Dqrcode"
+1504856846962	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "http://ui.ptlogin2.qq.com/cgi-bin/login?style=9&appid=30000101&low_login=0&hln_css=http%3A%2F%2Fmat1.gtimg.com%2Fgongyi%2Fm%2Fhtml5%2Flogo_login.png&s_url=http%3A%2F%2Fssl.gongyi.qq.com%2Fm%2Fweixin%2Fyqj_main.html%3Fid%3D415%26did%3D1214042801201708224500020050%26ADTAG%3Dqrcode"
+1504856846967	Marionette	DEBUG	Received DOM event "pageshow" for "http://ui.ptlogin2.qq.com/cgi-bin/login?style=9&appid=30000101&low_login=0&hln_css=http%3A%2F%2Fmat1.gtimg.com%2Fgongyi%2Fm%2Fhtml5%2Flogo_login.png&s_url=http%3A%2F%2Fssl.gongyi.qq.com%2Fm%2Fweixin%2Fyqj_main.html%3Fid%3D415%26did%3D1214042801201708224500020050%26ADTAG%3Dqrcode"
+1504856847405	Marionette	DEBUG	Received DOM event "pageshow" for "http://ui.ptlogin2.qq.com/cgi-bin/login?style=9&appid=30000101&low_login=0&hln_css=http%3A%2F%2Fmat1.gtimg.com%2Fgongyi%2Fm%2Fhtml5%2Flogo_login.png&s_url=http%3A%2F%2Fssl.gongyi.qq.com%2Fm%2Fweixin%2Fyqj_main.html%3Fid%3D415%26did%3D1214042801201708224500020050%26ADTAG%3Dqrcode"
+1504856847835	Marionette	DEBUG	Canceled page load listener because no navigation has been detected
+[GPU 7992] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7992] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1504856851440	addons.productaddons	WARN	Failed downloading via XHR, status: 0, reason: error
+1504856851442	addons.productaddons	WARN	Failed downloading via XHR, status: 0, reason: error
+JavaScript error: resource://shield-recipe-client/lib/RecipeRunner.jsm, line 153: TypeError: prefs is undefined
+[Child 6212] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7992] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+mon/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1504856583514	Marionette	DEBUG	loaded listener.js
+1504856590806	Marionette	DEBUG	loaded listener.js
+1504856649438	Marionette	DEBUG	loaded listener.js
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1504856774592	Marionette	DEBUG	loaded listener.js
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 7452] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+[Parent 1280] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 7644] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 7644] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+

@@ -1,0 +1,25 @@
+#tab {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: auto;
+    border-collapse: collapse;
+}
+#tab td, #tab th {
+    font-size: 1em;
+    border: 1px solid #6869ff;
+    padding: 3px 7px 2px 7px;
+}
+#tab th {
+  font-size:1.1em;
+  text-align:left;
+  padding-top:5px;
+  padding-bottom:4px;
+  background-color: #53c941;
+  color:#ffffff;
+}
+#tab tr.tr td {
+    color: #000000;
+    background: #Eaf2d3;
+}
+#tab td {
+    color: #0e1211;
+}

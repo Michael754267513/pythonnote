@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'css_links.html' %}
+    <title>NSops</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+            </div>
+            {% include 'nav.html' %}
+        </div>
+         <div id="page-wrapper2" class="gray-bg">
+            <div class="row border-bottom">
+            </div>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

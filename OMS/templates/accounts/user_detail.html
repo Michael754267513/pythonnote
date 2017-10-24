@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>用户详情</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li class="{{ var1 }}">
+                    <strong><a href="{% url 'user_list' %}">用户</a></strong>
+                </li>
+                <li class="{{ var1 }}">
+                    <strong>用户详情页</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+                                        <h2>用户详情页</h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        {% if user.is_active %}
+                                        <dt>激活状态:</dt><dd><span class="label label-primary">可用</span></dd>
+                                        {% else %}
+                                        <dt>激活状态:</dt><dd><span class="label label-primary">可用</span></dd>
+                                        {% endif %}
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        {% if user.is_superuser %}
+                                        <dt>管理员:</dt><dd><span class="label label-primary">是</span></dd>
+                                        {% else %}
+                                        <dt>管理员:</dt><dd><span class="label label-primary">否</span></dd>
+                                        {% endif %}
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        {% if user.is_staff %}
+                                        <dt>访问后台权限:</dt><dd><span class="label label-primary">是</span></dd>
+                                        {% else %}
+                                        <dt>访问后台权限:</dt><dd><span class="label label-primary">是</span></dd>
+                                        {% endif %}
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>用户名:</dt> <dd>{{ user.username }}</dd>
+                                        <dt>职位:</dt> <dd>{{ user.job }}</dd>
+                                        <dt>First name:</dt> <dd>{{ user.first_name }}</dd>
+                                        <dt>Last name:</dt> <dd>{{ user.last_name }}</dd>
+                                        <dt>Email:</dt> <dd>{{ user.email }}</dd>
+                                        <dt>用户组:</dt> <dd>{% for item in user.groups.all %} {{ item.name }} {% endfor %} </dd>
+                                        <dt>权限:</dt> <dd style="width: 100%;">{% for item in user.user_permissions.all %}<p>{{ item }}</p>{% endfor %}</dd>
+                                        <dt>公司:</dt> <dd style="width: 100%;"><a href="#" class="text-navy"> Leshu Company</a> </dd>
+{#                                        <dt>程序迭代版本:</dt> <dd> 	v1.4.2 </dd>#}
+                                    </dl>
+                                </div>
+                                <div class="col-lg-7" id="cluster_info">
+                                    <dl class="dl-horizontal" >
+
+                                        <dt>最近登陆:</dt> <dd>{{ user.last_login}}</dd>
+                                        <dt>加入时间:</dt> <dd>{{ user.date_joined}}</dd>
+{#                                        <dt>创建时间:</dt> <dd> 	10.07.2014 23:36:57 </dd>#}
+{#                                        <dt>Participants:</dt>#}
+{#                                        <dd class="project-people">#}
+{#                                        <a href=""><img alt="image" class="img-circle" src="img/a1.jpg"></a>#}
+{#                                        <a href=""><img alt="image" class="img-circle" src="img/a2.jpg"></a>#}
+{#                                        <a href=""><img alt="image" class="img-circle" src="img/a4.jpg"></a>#}
+{#                                        <a href=""><img alt="image" class="img-circle" src="img/a5.jpg"></a>#}
+{#                                        </dd>#}
+                                    </dl>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <dl class="dl-horizontal">
+                                            <dt>密码:</dt>
+                                            <dd>
+                                                <div class="progress progress-striped active m-b-sm">
+                                                    <div style="width: 100%;" class="progress-bar">{{ user.password }}</div>
+                                                </div>
+                                                <small>明文:<strong></strong></small>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-lg-3">
+                <div class="wrapper wrapper-content project-manager">
+                    <h4>描述</h4>
+{#                    <img src="img/zender_logo.png" class="img-responsive">#}
+                    <p class="small">
+                        OMS用户详情！
+                    </p>
+                    <p class="small font-bold">
+                        <span><i class="fa fa-circle text-warning"></i> High priority</span>
+                    </p>
+                    <h5>权限标签</h5>
+                    <ul class="tag-list" style="padding: 0">
+                        {% for item in user.permissions.all %}
+                        <li><a href=""><i class="fa fa-tag"></i>{{ item }}</a></li>
+                        {% endfor %}
+                    </ul>
+{#                    <h5>Project files</h5>#}
+{#                    <ul class="list-unstyled project-files">#}
+{#                        <li><a href=""><i class="fa fa-file"></i> Project_document.docx</a></li>#}
+{#                        <li><a href=""><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>#}
+{#                        <li><a href=""><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>#}
+{#                        <li><a href=""><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>#}
+{#                    </ul>#}
+{#                    <div class="text-center m-t-md">#}
+{#                        <a href="#" class="btn btn-xs btn-primary">Add files</a>#}
+{#                        <a href="#" class="btn btn-xs btn-primary">Report contact</a>#}
+{##}
+{#                    </div>#}
+                </div>
+            </div>
+    </div>
+
+{% endblock %}

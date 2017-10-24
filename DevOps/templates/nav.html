@@ -1,0 +1,81 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            {% include 'nav_li_profile.html' %}
+            <li id="user">
+                <a href="#"><i class="fa fa-group"></i> <span class="nav-label">用户管理</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="group"><a>用户组视图</a></li>
+                    <li  class="user"><a href="/user/user_lists">用户视图</a></li>
+                </ul>
+            </li>
+            <li id="perm">
+                <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">授权管理</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="sudo">
+                        <a class="sudo">Sudo</a>
+                    </li>
+                    <li class="role">
+                        <a>系统用户</a>
+                    </li>
+                    <li class="rule">
+                        <a>授权规则</a>
+                    </li>
+                </ul>
+            </li>
+            <li id="deploy">
+                <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">发布系统</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="role">
+                        <a>系统分类①</a>
+                    </li>
+                    <li class="rule">
+                        <a>系统分类②</a>
+                    </li>
+                </ul>
+            </li>
+            <li id="cdn">
+                <a href="#"><i class="fa fa-refresh"></i> <span class="nav-label">CDN管理</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="role">
+                        <a>网宿CDN管理</a>
+                    </li>
+                    <li class="rule">
+                        <a>帝联CDN管理</a>
+                    </li>
+                </ul>
+            </li>
+            <li id="mem">
+                <a href="#"><i class="fa fa-align-right"></i> <span class="nav-label">缓存管理</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="role">
+                        <a>K-V缓存管理</a>
+                    </li>
+                    <li class="rule">
+                        <a>静态资源缓存</a>
+                    </li>
+                </ul>
+            </li>
+            <li id="conf">
+                <a href="#"><i class="fa fa-archive"></i> <span class="nav-label">配置文件管理</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="role">
+                        <a>内部配置文件</a>
+                    </li>
+                    <li class="rule">
+                        <a>外部配置文件</a>
+                    </li>
+                </ul>
+            </li>
+            <li id="jasset">
+                <a><i class="fa fa-inbox"></i> <span class="nav-label">资产管理</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="group"><a>查看资产组</a></li>
+                    <li class="asset"> <a>查看资产</a></li>
+                    <li class="idc"> <a>查看机房</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+</nav>

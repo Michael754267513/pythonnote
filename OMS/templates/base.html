@@ -1,0 +1,235 @@
+<!--
+*
+*  INSPINIA - Responsive Admin Theme
+*  version 2.6.2
+*
+-->
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OMS</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+
+    <!-- Toastr style -->
+    <link href="/static/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+    <!-- orris -->
+    <link href="/static/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="/static/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/public_call.css" rel="stylesheet">
+
+    <link href="/static/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/css/plugins/steps/jquery.steps.css" rel="stylesheet">
+
+
+    <style>
+
+        .wizard > .content > .body  {position: relative;}
+
+    </style>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="/static/img/profile_small.jpg" />
+                             </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ username }}</strong>
+                             </span> <span class="text-muted text-xs block">Deploy Engineer <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="#">Contacts</a></li>
+                                <li><a href="#">Mailbox</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'user_logout' %}">退出</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            OMS
+                        </div>
+                    </li>
+
+                    <li class="{{ var1 }}">
+                        <a href="{% url 'dashboard' %}"><i class="fa fa-th-large"></i> <span class="nav-label">仪表盘</span> </a>
+                    </li>
+
+                    <li class="{{ var2 }}">
+                        <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">用户组管理</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="{{ highlight1 }}"><a href="{% url 'group_list' %}">组管理<span class="label label-info pull-right">OMS</span></a></li>
+                            <li class="{{ highlight2 }}"><a href="{% url 'user_list' %}">用户管理<span class="label label-info pull-right">OMS</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+
+                    <li class="{{ var3 }}">
+                        <a href="{% url '_list' %}"><i class="fa fa-envelope"></i><span class="nav-label">业务组管理</span></a>
+                    </li>
+
+                    <li class="{{ var4 }}">
+                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">系统设置</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="{{ highlight1 }}"><a href="{% url 'game_zone_list' %}">设置分区</a></li>
+                            <li class="{{ highlight2 }}"><a href="{% url 'info_list' %}">定义键值</a></li>
+                            <li class="{{ highlight6 }}"><a href="{% url 'domain_list' %}">定义域名</a></li>
+                            <li class="{{ highlight3 }}"><a href="{% url 'upload_list' %}">文件上传</a></li>
+                            <li class="{{ highlight4 }}"><a href="{% url 'path_list' %}">路径设置</a></li>
+                            <li class="{{ highlight5 }}"><a href="{% url 'produce_list' %}">生成配置</a></li>
+                        </ul>
+                    </li>
+                    <li class="{{ var5 }}">
+                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">资产管理</span>  <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="{{ highlight1 }}"><a href="{% url 'assets_list' %}">资产列表</a></li>
+                            <li class="{{ highlight2 }}"><a href="{% url 'hardware_list' %}">硬件配置</a></li>
+                            <li class="{{ highlight3 }}"><a href="{% url 'network_list' %}">基础网络</a></li>
+                            <li class="{{ highlight4 }}"><a href="{% url 'service_list' %}">服务管理</a></li>
+                            <li class="{{ highlight5 }}"><a href="{% url 'tag_list' %}">标签管理</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="{{ var6 }}">
+                        <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">仓库管理</span>  <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="{{ highlight1 }}"><a href="{% url 'repository_list' %}">仓库列表</a></li>
+                            <li class="{{ highlight2 }}"><a href="{% url 'repo_version_list' %}">版本列表</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="{{ var7 }}">
+                        <a href="#"><i class="fa fa-globe"></i> <span class="nav-label">SaltStack</span><span class="label label-info pull-right">集中化管理</span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="{{ highlight1 }}"><a href="{% url 'salt_key_manager' %}">minions</a></li>
+                            <li class="{{ highlight15 }}"><a href="{% url 'deploy_game_wizard_list' %}">游戏开服
+                            <span class="label label-info pull-right">定制</span></a></li>
+                            <li class="{{ highlight2 }}"><a href="{% url 'code_release_list' %}">代码发布</a></li>
+                            <li class="{{ highlight11 }}"><a href="{% url 'code_backup_list' %}">代码备份</a></li>
+                            <li class="{{ highlight12 }}"><a href="{% url 'code_rollback_list' %}">版本回退</a></li>
+                            <li class="{{ highlight14 }}"><a href="{% url 'sync_config_list' %}">同步配置
+                                <span class="label label-info pull-right">应用</span></a></li>
+                            <li class="{{ highlight3 }}"><a href="{% url 'file_push_list' %}">更新配置
+                                <span class="label label-info pull-right">服务</span></a></li>
+                            <li class="{{ highlight13 }}"><a href="{% url 'merge_server_list' %}">物理合服
+                            <span class="label label-info pull-right">定制</span></a></li>
+                            <li class="{{ highlight4 }}"><a href="{% url 'services_handle_list' %}">服务管理</a></li>
+                            <li class="{{ highlight5 }}"><a href="{% url 'command_execute_list' %}">执行命令</a></li>
+                            <li class="{{ highlight6 }}"><a href="{% url 'cron_list' %}">计划任务</a></li>
+                            <li class="{{ highlight7 }}"><a href="{% url 'all_zone_update_list' %}">全服更新</a></li>
+                            <li class="{{ highlight8 }}"><a href="{% url 'system_user_list' %}">用户管理
+                                <span class="label label-info pull-right">Linux</span></a></li>
+                            <li class="{{ highlight9 }}"><a href="{% url 'change_password_record' %}">修改密码
+                                <span class="label label-info pull-right">Linux</span></a></li>
+                            <li class="{{ highlight10 }}"><a href="{% url 'yum_install_soft_record' %}">Yum安装
+                                <span class="label label-info pull-right">Linux</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="{{ var8 }}">
+                        <a href="#"><i class="fa fa-database"></i><span class="nav-label"> ＭySQL</span>
+                            <span class="pull-right label label-info">关系型数据库</span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="{{ highlight1 }}"><a href="{% url 'dbs_list' %}">实例列表</a></li>
+                            <li class="{{ highlight2 }}"><a href="#">数据迁移</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="{{ var9 }}">
+                        <a href="#"><i class="fa fa-database"></i><span class="nav-label"> Redis</span>
+                            <span class="pull-right label label-info">键值型数据库</span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="{{ highlight1 }}"><a href="{% url 'dbs_redis_list' %}">实例列表</a></li>
+                            <li class="{{ highlight2 }}"><a href="#">实例迁移</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" action="#">
+                <div class="form-group">
+                    <input type="text" placeholder="全局搜索" class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Welcome to OMS system.</span>
+                </li>
+                <li>
+                    <a href="{% url 'user_login' %}">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+            {% block content %}
+
+            {% endblock %}
+        <div class="footer">
+            <div class="pull-right">
+                10GB of <strong>250GB</strong> Free.
+            </div>
+            <div>
+                <strong>Copyright</strong> Leshu Company &copy; 2017-2018
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="/static/js/jquery-2.1.1.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="/static/js/inspinia.js"></script>
+    <script src="/static/js/plugins/dataTables/datatables.min.js"></script>
+    <script src="/static/js/plugins/pace/pace.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="/static/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- ChartJS-->
+    <script src="/static/js/plugins/chartJs/Chart.min.js"></script>
+
+    <!-- oms自定义js -->
+    <script src="/static/js/user-manager.js"></script>
+    <script src="/static/js/oms_public.js"></script>
+
+    {% block content2 %}
+
+    {% endblock %}
+
+</body>
+</html>

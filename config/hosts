@@ -1,0 +1,11 @@
+[web]
+web01 = 192.168.2.188
+web02 = 192.168.2.200
+web03 = 192.168.2.189
+
+[interface]
+rpc01 = 2.2.2.1 username=root password=root
+
+[db]
+db01 = 2.2.2.2
+

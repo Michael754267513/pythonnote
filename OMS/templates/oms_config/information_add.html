@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>添加键值</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'game_zone_list' %}">系统设置</a>
+                </li>
+
+                <li class="{{ var4 }}">
+                    <strong>添加键值</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>添加键值</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal">{% csrf_token %}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">游戏分区</label>
+
+                                <div class="col-sm-10">
+                                        <select class="form-control m-b" id="id_zones" name="zones">
+                                            <option value="">--------------请选择--------------</option>
+                                            {% for item in zones %}
+                                                {% ifequal select.id item.id %}
+                                                    <option value="{{ item.id }}" selected>{{ item.name }}</option>
+                                                {% else %}
+                                                    <option value="{{ item.id }}">{{ item.name }}</option>
+                                                {% endifequal %}
+                                            {% endfor %}
+                                        </select>
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">字段名</label>
+                            <div class="col-sm-10">
+                                    <input id="id_key" name="key" type="text" class="form-control" value="{{ info.key }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">字段值</label>
+                            <div class="col-sm-10">
+                                    <input id="id_value" name="value" type="text" class="form-control" value="{{ info.value }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注</label>
+                            <div class="col-sm-10">
+                                <label>
+                                    <input id="id_context" name="context" type="text" class="form-control" value="{{ info.context }}">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white" type="submit">取消</button>
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+

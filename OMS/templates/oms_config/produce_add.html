@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>生成文件</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li>
+                    <a href="#">系统设置</a>
+                </li>
+                <li class="{{ var4 }}">
+                    <strong>生成文件</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>生成文件</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal">{% csrf_token %}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">业务组</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" id="id_s" name="s">
+                                        {% for item in s %}
+                                            <option value="{{ item.id }}">{{ item.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">选择分区</label>
+
+                            <div class="col-sm-10 merge_zones">
+                                {% for zone in zones %}
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" value="{{ zone.id }}"
+                                           id="id_zones_{{ zone.id }}" name="zones"> {{ zone.name }}
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">模板文件</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" id="id_config_file" name="config_file">
+                                        {% for item in config_files %}
+                                            <option value="{{ item.id }}">{{ item.doc_file }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">生成至</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" id="id_generate_path" name="generate_path">
+                                        {% for item in generate_object %}
+                                            <option value="{{ item.id }}">{{ item.path_value }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">选择对应仓库</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" id="id_project_name" name="project_name">
+                                        {% for item in repo_object %}
+                                            <option value="{{ item.id }}">{{ item.repo_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                        </div>
+
+                         <div class="hr-line-dashed"></div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white" type="submit">取消</button>
+                                <button class="btn btn-primary" type="submit">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

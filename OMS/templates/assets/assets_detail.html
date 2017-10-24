@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>服务器详情</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li class="{{ var5 }}">
+                    <strong><a href="{% url 'assets_list' %}">资产管理</a></strong>
+                </li>
+                <li class="{{ var5 }}">
+                    <strong>服务器详情页</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+                                        <h2>服务器详情页</h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt><dd><span class="label label-primary">
+                                        {% if assets.on_line %}
+                                            可用
+                                        {% else %}
+                                            不可用
+                                        {% endif %}</span></dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>业务组名:</dt> <dd>{{ assets.s.name }}</dd>
+                                        <dt>游戏分区:</dt> <dd>
+                                        {% for zone in assets.game_zone.all %}
+                                            {{ zone }}
+                                        {% endfor %}</dd>
+                                        <dt>主机名:</dt> <dd>{{ assets.host_name }}</dd>
+                                        <dt>别名:</dt> <dd>{{ assets.alias_name }}</dd>
+                                        <dt>公司:</dt> <dd><a href="#" class="text-navy"> Leshu Company</a> </dd>
+                                        <!--<dt>程序迭代版本:</dt> <dd> 	v1.4.2 </dd>-->
+                                    </dl>
+                                </div>
+                                <div class="col-lg-7" id="cluster_info">
+                                    <dl class="dl-horizontal" >
+
+                                        <dt>公网:</dt> <dd>{{ assets.networks.public_address }}</dd>
+                                        <dt>内网:</dt> <dd>{{ assets.networks.private_address }}</dd>
+                                        <dt>接入商:</dt> <dd>{{ assets.networks.provide }}</dd>
+                                        <dt>带宽类型:</dt> <dd>{{ assets.networks.get_net_type_display }}</dd>
+                                        <dt>带宽<small>(0代表不限制)</small>:</dt> <dd>{{ assets.networks.bandwidth }}
+                                        {{ assets.networks.get_unit_display }}</dd>
+                                    </dl>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <dl class="dl-horizontal">
+                                            {% for item in assets.hardware.all %}
+                                            <dt>{{ item.name }}:</dt>
+                                            <dd>{{ item.value }} {{ item.get_unit_display }}</dd>
+                                            {% endfor %}
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <dl class="dl-horizontal">
+                                            <dt>运行服务:</dt>
+                                            <dd>{% for item in assets.services.all %}  {{ item.name }} {% endfor %}</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <dl class="dl-horizontal">
+                                        <dt>帐号密码:</dt>
+                                            <dd>{{ assets.superuser }} | {{ assets.superuser_pass }}</dd>
+                                            {% if users %}
+                                            <dd>{{ users.sys_user }} &nbsp;{{ users.sys_pass }}</dd>
+                                            {% endif %}
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-lg-3">
+                <div class="wrapper wrapper-content project-manager">
+                    <h4>描述</h4>
+{#                    <img src="img/zender_logo.png" class="img-responsive">#}
+                    <p class="small">
+                        服务器详情 包括服务器硬件配置，网络，服务，业务标记等设置
+                    </p>
+                    <p class="small font-bold">
+                        <span><i class="fa fa-circle text-warning"></i> High priority</span>
+                    </p>
+                    <h5>业务类型标签</h5>
+                    <ul class="tag-list" style="padding: 0">
+                        {% for item in assets.tag.all %}
+                        <li><a href=""><i class="fa fa-tag"></i>{{ item.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+{#                    <h5>Project files</h5>#}
+{#                    <ul class="list-unstyled project-files">#}
+{#                        <li><a href=""><i class="fa fa-file"></i> Project_document.docx</a></li>#}
+{#                        <li><a href=""><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>#}
+{#                        <li><a href=""><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>#}
+{#                        <li><a href=""><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>#}
+{#                    </ul>#}
+{#                    <div class="text-center m-t-md">#}
+{#                        <a href="#" class="btn btn-xs btn-primary">Add files</a>#}
+{#                        <a href="#" class="btn btn-xs btn-primary">Report contact</a>#}
+{##}
+{#                    </div>#}
+                </div>
+            </div>
+    </div>
+
+{% endblock %}

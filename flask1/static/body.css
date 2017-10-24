@@ -1,0 +1,49 @@
+body {
+  color: #4babe8;
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, Palatino, serif;
+  }
+
+p {
+    color: #0e1211;
+
+}
+p1 {
+    color:red;
+    font-size:14px;
+}
+/* 分组选择器 */
+p2,p4 {
+  color: green;
+  }
+/* id选择器 定义html id字段  */
+#att {
+    color: #4babe8
+}
+
+#tab {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: auto;
+    border-collapse: collapse;
+}
+#tab td, #tab th {
+    font-size: 1em;
+    border: 1px solid #6869ff;
+    padding: 3px 7px 2px 7px;
+}
+#tab th {
+  font-size:1.1em;
+  text-align:left;
+  padding-top:5px;
+  padding-bottom:4px;
+  background-color: #53c941;
+  color:#ffffff;
+}
+#tab tr.tr td {
+    color: #000000;
+    background: #Eaf2d3;
+}
+#tab td {
+    color: #0e1211;
+}

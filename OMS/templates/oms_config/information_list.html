@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>定义键值</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+
+                <li>
+                    <a href="{% url 'game_zone_list' %}">系统设置</a>
+                </li>
+
+                <li class={{ var2 }}>
+                    <strong>定义键值</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <!--<h5>Basic Data Tables example with responsive plugin</h5>-->
+                        <a href="{% url 'info_add' %}" class="btn btn-primary">添加键值</a>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                            <ul class="nav navbar-nav navbar-left" style="margin-bottom: 12px; margin-top: 8px;">{% csrf_token %}
+                            <div>
+                                <span>业务组:</span>
+                                <label for="id_">
+                                    <select class="select_box" id="id_" name="s">
+                                        <option value="0">------选择------</option>
+                                        {% for  in s %}
+                                            {% ifequal .id dep_id %}
+                                                <option value ="{{ .id }}" selected>{{ .name }}</option>
+                                            {% else %}
+                                                <option value ="{{ .id }}">{{ .name }}</option>
+                                            {% endifequal %}
+                                        {% endfor %}
+                                    </select>
+                                </label>
+                                <span>游戏分区:</span>
+                                <input type="hidden" id="zone_id" value="{{ zone_id }}">
+                                <label>
+                                    <select class="select_box" id="id_game_zone" name="game_zone">
+                                        <option value ="0">------选择------</option>
+                                        {% for zone in zones %}
+                                            {% ifequal zone.id zone_id %}
+                                                <option value ="{{ zone.id }}" selected>{{ zone.name }}</option>
+                                            {% else %}
+                                                <option value="{{ zone.id }}">{{ zone.name }}</option>
+                                            {% endifequal %}
+                                        {% endfor %}
+                                    </select>
+                                </label>
+                                <a class="full_copy btn btn-warning" id="copyAll" style="display:none">复制至</a>
+                                <label>
+                                    <select style="display:none" class="select_box" id="id_game_zone2" name="game_zone2">
+                                        <option value ="0">------选择------</option>
+                                    </select>
+                                </label>
+                            </div>
+                            </ul>
+                        <div class="clearfix">
+
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTables-example"
+                                   id="info_list" >
+                                <thead>
+                                <tr>
+                                    <!--<th>多选</th>-->
+                                    <th>游戏分区</th>
+                                    <th>字段名</th>
+                                    <th>字段值</th>
+                                    <th>备注</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in info %}
+                                    <tr class="gradeX">
+                                        <td>{{ item.zones.name }}</td>
+                                        <td>{{ item.key }}</td>
+                                        <td>{{ item.value }}</td>
+                                        <td>{{ item.context }}</td>
+                                        <td>
+                                            <a class="btn btn-info" href="{% url "info_edit" item.id %}">编辑</a>
+                                            <a href="javascript:void(0);" deleteId="{{ item.id }}" class="btn btn-danger">删除</a>
+                                            <a class="btn btn-primary" href="{% url 'info_detail' item.id %}">详情</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <!--<th>多选</th>-->
+                                    <th>游戏分区</th>
+                                    <th>字段名</th>
+                                    <th>字段值</th>
+                                    <th>备注</th>
+                                    <th>操作</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content2 %}
+    <script>
+
+        //根据业务组获取游戏分区
+         $('#id_').change(function(){
+             fun($(this));
+         });
+         //选择游戏分区提交表单
+         $('#id_game_zone').change(function(){
+
+         });
+         $('#copyAll').click(function(){
+             var id_game_zone2 = $('#id_game_zone2').val();
+             var zone_id = $('#id_game_zone').val();
+
+             if(zone_id){
+                 $('#copyAll').attr('href',"/oms_config/game_zone_copy/?id=" + zone_id + "&id2=" + id_game_zone2);
+             }
+         });
+
+
+         function fun(obj){
+             var _me = $(obj);
+             $.ajax({
+                 url: '/oms_config/get_zones/' + _me.find(':selected').val(),
+                 'dataType':'json',
+                 success: function(data){
+                     console.log(data);
+                     $('#id_game_zone').empty();//请空原有游戏分区数据
+                     $('#id_game_zone2').empty();//请空原有游戏分区数据
+                     $('<option>-----请选择-----</option>').appendTo($('#id_game_zone'));
+                     $('<option>-----请选择-----</option>').appendTo($('#id_game_zone2'));
+                     var zone_id = _me.find(':selected').val();
+
+                     if(zone_id){
+                         $('#copyAll').show();
+                         $('#id_game_zone2').show();
+                         $('#copyAll').attr('href',"/oms_config/game_zone_copy/?id=" + zone_id);
+                     }
+                     //console.log(zone_id);
+                     for(var key in data['zone']){
+                         if(key == zone_id){
+                             $('<option value='+key+' selected>'+data['zone'][key]+'</option>').appendTo($('#id_game_zone'));
+                             $('<option value='+key+'>'+data['zone'][key]+'</option>').appendTo($('#id_game_zone2'));
+
+                         }else{
+                             $('<option value='+key+'>'+data['zone'][key]+'</option>').appendTo($('#id_game_zone'));
+                             $('<option value='+key+'>'+data['zone'][key]+'</option>').appendTo($('#id_game_zone2'));
+                         }
+                     }   //往游戏分区里面填值
+                 },
+                 error: function(){
+                     console.log('error')
+                 }
+             })
+         }
+    </script>
+{% endblock %}
+

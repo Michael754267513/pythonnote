@@ -1,0 +1,110 @@
+/* 派生选择器 具体看html里面标签*/
+li strong {
+    font-style: italic;
+    font-weight: normal;
+  }
+strong {
+     color: red;
+     }
+
+h2 {
+     color: red;
+     }
+
+h2 strong {
+     color: blue;
+     }
+/* id 选择器*/
+#idchose {
+    color: #ff49e6;
+}
+#idchose1 storng {
+    color: #384bff;
+}
+/* 类选择器 */
+/* .cs1 {
+    color: #79ff5a;
+} */
+/*.cs1 storng {
+    color: #3f25ff;
+} */
+p.cs1 storng {
+    color: #ff2121;
+}
+/* 属性选择器 */
+/* a [title] {
+     color: #5a45ff;
+} */
+[title] {
+     color: #ff38f0;
+}
+[title=michael1] {
+     color: #ff4d1c;
+}
+/* 属性选择器 不带class 和id的设置*/
+input[type="text"]
+{
+  width:150px;
+  display:block;
+  margin-bottom:10px;
+  background-color: #ff0fbb;
+  font-family: Verdana, Arial;
+}
+
+input[type="button"]
+{
+  width:120px;
+  margin-right: auto;
+  display:block;
+  font-family: Verdana, Arial;
+}
+/* 文本缩进 */
+p.cs1 {word-spacing: 3px;}
+/*文本大小写控制*/
+p.lower {text-transform: lowercase}
+p.upper {text-transform: uppercase}
+p.capit {text-transform: capitalize}
+/* 鼠标事件*/
+p.capit:visited{
+    background-color: #ff1f15
+}
+p.capit:hover{
+     background-color: #ff0fbb
+}
+p.capit:active{
+     background-color: #1c1bff
+}
+p.link {text-decoration: none}
+p.link:visited {text-decoration:none;}
+p.link:hover{
+    text-decoration: none;
+}
+p.link:active{
+    text-decoration: underline;
+}
+ul.inside{
+    list-style-position: outside;
+}
+/* 表格 */
+#tab {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: auto;
+    border-collapse: collapse;
+}
+#tab td, #tab th {
+    font-size: 1em;
+    border: 1px solid #6869ff;
+    padding: 3px 7px 2px 7px;
+}
+#tab th {
+  font-size:1.1em;
+  text-align:left;
+  padding-top:5px;
+  padding-bottom:4px;
+  background-color:#A7C942;
+  color:#ffffff;
+}
+#tab tr.tr td {
+    color: #000000;
+    background: #Eaf2d3;
+}

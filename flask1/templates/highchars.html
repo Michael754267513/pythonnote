@@ -1,0 +1,43 @@
+<html>
+<head>
+   <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+   <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+   <script>
+     $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '父标题'
+            },
+            subtitle: {
+                text: "子标题"
+            },
+            xAxis: {
+                categories: ['苹果', '香蕉', '橙子']   //指定x轴分组
+            },
+            yAxis: {
+                title: {
+                    text: 'something'
+                }
+            },
+             series: [{                                //指定数据列
+                name: '小明',                          //数据列名
+                data: [1, 2, 4]                        //数据
+            }, {
+                name: '小红',
+                data: [5, 7, 3]
+            }, {
+                name: "小猪",
+                 data: [3, 4, 3]
+             }]
+        });
+    });
+   </script>
+</head>
+
+<body>
+   <div id="container" style="min-width:800px;height:400px;"></div>
+</body>
+</html>

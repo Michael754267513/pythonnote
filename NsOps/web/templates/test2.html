@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 定义页面作者 -->
+    <meta name="author" content="Michael">
+    <!-- 定义页面编码 -->
+    <meta charset="UTF-8">
+    <!-- 定义所有的默认标签 -->
+    <base href="http://img4.cache.netease.com" target="_blank">
+    <!-- 自动刷新页面 -->
+    <meta http-equiv="refresh" content="120">
+    <!-- 定义搜索关键词 -->
+    <meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript">
+    <title>测试页面</title>
+</head>
+<body>
+<!-- 定义一个body的背景色 -->
+<! -- body style="background-color:yellow;" -->
+<!-- 这是一个段落 -->
+<h1>标题</h1>
+<h2>春晓</h2>
+<p>春眠不觉晓，<br>处处闻啼鸟。<br>夜来风雨声，<br>花落知多少。
+</p>
+<!-- 定义一个标题的背景色 -->
+<h3 style="background-color:red;">这是一个标题</h3>
+<h4 style="color:blue;margin-left:20px;"> 字体颜色</h4>
+<!-- 定义色彩 -->
+<p style="color:blue;margin-left:20px;">This is a paragraph.</p>
+<p>段落</p>
+<hr>
+<p>段落</p>
+<!-- 换行符 -->
+<p>我<br>是<br>谁</p>
+<!-- 定义为blabnk会重新开启一个新的窗口 -->
+<a href="https://www.baidu.com" target="_blank"> 连接 </a>
+<!-- 用户注册相关 -->
+<form>
+First name: <input type="text" name="firstname"><br>
+Last name: <input type="text" name="lastname">
+</form>
+<form>
+Password: <input type="password" name="pwd">
+</form>
+<form>
+<input type="radio" name="sex" value="male">Male<br>
+<input type="radio" name="sex" value="female">Female
+</form>
+<form>
+<input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
+<input type="checkbox" name="vehicle" value="Car">I have a car
+</form>
+<form name="input" action="active.html" method="get">
+Username: <input type="text" name="user">
+<input type="submit" value="Submit">
+</form>
+<form action="">
+<input type="button" value="Hello world!">
+</form>
+<!-- 下拉列表  selected默认选项 -->
+<form action="">
+<select name="cars">
+<option value="volvo">Volvo</option>
+<option value="saab" selected>Saab</option>
+<option value="fiat">Fiat</option>
+<option value="audi">Audi</option>
+</select>
+</form>
+<textarea rows="10" cols="30">
+文本区域
+</textarea>
+<!-- 调用head的默认标签 -->
+<img src="/cnews/2016/8/9/20160809092859edf4a_550.jpg" width="10" height="10">
+<!-- 定义一个表格 -->
+<table border="1">
+    <tr>
+    <th>Directory</th>
+    </tr>
+    {% for k,v in dir.items %}
+    <tr>
+        <td>{{k}}:{{v}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table border="1">
+<tr>
+<th>Header 1</th>
+<th>Header 2</th>
+</tr>
+<tr>
+<td>row 1, cell 1</td>
+<td>row 1, cell 2</td>
+</tr>
+<tr>
+<td>row 2, cell 1</td>
+<td>row 2, cell 2</td>
+</tr>
+    <p>Computer List</p>
+    <ol type="a">
+    {% for d in computer %}
+        <li>{{d}}</li>
+    {% endfor %}
+    </ol>
+</table>
+<video width="320" height="240" controls>
+  <source src="http://www.runoob.com/try/demo_source/movie.mp4" type="video/mp4">
+</video>
+<div id="container" style="width:500px">
+
+</div>
+</body>
+</html>

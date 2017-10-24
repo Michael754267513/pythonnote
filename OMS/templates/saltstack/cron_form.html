@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>计划任务</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'salt_key_manager' %}">SaltStack</a>
+                </li>
+                <li class="{{ var7 }}">
+                    <strong>计划任务</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>计划任务 </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal">{% csrf_token %}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="id_s">业务组:</label>
+                            <div class="col-sm-10">
+                                <label>
+                                    <select class="form-control m-b" id="id_s" name="s">
+                                        <option value="">-----请选择-----</option>
+                                        {% for  in s %}
+                                            <option value="{{ .id }}">{{ .name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="id_zones">游戏分区:</label>
+                            <div class="col-sm-10">
+                                <label>
+                                    <select class="form-control m-b" id="id_zones" name="zones">
+                                        <option value="">-----请选择-----</option>
+                                        {% for zone in zones %}
+                                            <option value="{{ zone.id }}">{{ zone.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">发送指令主机</label>
+                            <div class="col-sm-10">
+                                <label>
+                                    <input id="id_client" name="client" type="text" class="form-control" value="local">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="id_tgt">目标主机</label>
+                            <div class="col-sm-10">
+                                <label>
+                                    <select multiple="multiple" id="id_tgt" name="tgt">
+                                        {% for server in servers %}
+                                            <option value="{{ server.id }}">{{ server.alias_name }}|{{ server.host_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br />
+                                    <span class="helptext"> Hold down "Control", or "Command" on a Mac, to select more than one.</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="id_fun">执行模块</label>
+                            <div class="col-sm-10">
+                                <label>
+                                    <select id="id_fun" name="fun">
+                                        <option value="">-----请选择-----</option>
+                                        <option value="cron.raw_cron">cron.raw_cron</option>
+                                        <option value="cron.set_job">cron.set_job</option>
+                                        <option value="cron.rm_job">cron.rm_job</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group timedl" style="display:none">
+                            <label class="col-sm-2 control-label">分钟:</label>
+                            <div class="col-sm-10">
+                                <label for="id_minute">
+                                    <input id="id_minute" name="minute" type="text" class="form-control" value="*">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group timedl" style="display:none">
+                            <label class="col-sm-2 control-label">时:</label>
+                            <div class="col-sm-10">
+                                <label for="id_hour">
+                                    <input id="id_hour" name="hour" type="text" class="form-control" value="*">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group timedl" style="display:none">
+                            <label class="col-sm-2 control-label">天:</label>
+                            <div class="col-sm-10">
+                                <label for="id_day">
+                                    <input id="id_day" name="day" type="text" class="form-control" value="*">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group timedl" style="display:none">
+                            <label class="col-sm-2 control-label">月:</label>
+                            <div class="col-sm-10">
+                                <label for="id_month">
+                                    <input id="id_month" name="month" type="text" class="form-control" value="*">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group timedl" style="display:none">
+                            <label class="col-sm-2 control-label">星期几(1-7):</label>
+                            <div class="col-sm-10">
+                                <label for="id_day_week">
+                                    <input id="id_day_week" name="day_week" type="text" class="form-control" value="*">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">执行用户:</label>
+                            <div class="col-sm-10">
+                                <label for="id_sys_user">
+                                    <input id="id_sys_user" name="sys_user" type="text" class="form-control" value="root">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group action_param">
+                            <label class="col-sm-2 control-label">执行参数:</label>
+                            <div class="col-sm-10">
+                                <label for="id_arg">
+                                    <input id="id_arg" name="arg" type="text" class="form-control" />
+                                </label>
+                            </div>
+                        </div><input id="id_operate" maxlength="20" name="operate" type="hidden" />
+                        <input id="id_status" name="status" type="hidden" />
+                        <input id="id_context" maxlength="2000" name="context" type="hidden" />
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white" type="submit">取消</button>
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            var id_tgt = $('#id_tgt'), id_arg = $('#id_arg');
+        //根据业务组获取游戏分区
+        $('#id_s').change(function(){
+            var _me = $(this);
+            if (_me.find(':selected').val() == 0 ) {
+                window.location.reload();
+            }else{
+            $.ajax({
+                url: '/oms_config/get_zones/' + _me.find(':selected').val(),
+                'dataType':'json',
+                success: function(data){
+                    $('#id_zones').empty();//请空原有游戏分区数据
+                    $('<option>-----请选择-----</option>').appendTo($('#id_zones'));
+                    for(var key in data['zone']){
+                        $('<option value='+key+'>'+data['zone'][key]+'</option>').appendTo($('#id_zones'));
+                    }   //往游戏分区里面填值
+                },
+                error: function(){
+                    console.log('error')
+                }
+            })}
+        });
+
+        $('#id_zones').change(function(){
+            var _me = $(this);
+            $.ajax({
+                url: '/assets/get_servers/' + _me.find(':selected').val(),
+                'dataType':'json',
+                success: function(data){
+                    $('#id_tgt').empty();
+                    for(var key in data){
+                        $('<option value='+key+'>'+data[key]+'</option>').appendTo($('#id_tgt'));
+                    }
+                },
+                error: function(){
+                    console.log('error')
+                }
+            })
+        });
+        $('#id_fun').change(function(){
+            var _me = $(this).val();
+            if(_me == 'cron.set_job'){
+                $('.timedl').show();
+            }else{
+                $('.timedl').hide();
+            }
+            if(_me != 'cron.raw_cron'){
+                $('.action_param').show();
+            }else{
+                $('.action_param').hide();
+            }
+        })
+
+
+
+     }
+    </script>
+
+{% endblock %}

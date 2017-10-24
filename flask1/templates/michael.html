@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="/static/jquery-3.1.1.js"></script>
+    <meta charset="UTF-8">
+    <script>
+            document.getElementById("bott").onclick = function () {
+                panduan()
+            };
+            function panduan() {
+                var a = document.getElementById("username").value;
+                if (a.length == 0) {
+                    document.getElementById("usernull").innerHTML = "用户名不能为空";
+                }
+                var b = document.getElementById("passwd").value;
+                if (b.length == 0) {
+                    document.getElementById("passnull").innerHTML = "密码不能为空";
+                }
+            }
+</script>
+    <title>Title</title>
+</head>
+<body>
+请输入用户名：<input type="text" id="username"><a id="usernull"></a></br>
+</br>
+请输入密码：&nbsp;<input type="text" id="passwd"><a id="passnull"></a>
+</br>
+</br>
+<button id="bott" style="margin:0 0 0 50px;">登录</button>
+</body>
+</html>

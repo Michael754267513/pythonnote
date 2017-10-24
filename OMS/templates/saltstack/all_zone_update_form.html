@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading" xmlns="http://www.w3.org/1999/html">
+        <div class="col-lg-10">
+            <h2>全服更新</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'salt_key_manager' %}">SaltStack</a>
+                </li>
+                <li class="{{ var7 }}">
+                    <strong>全服更新</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>全服更新 </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal">{% csrf_token %}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">业务组</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" id="id_s" name="s">
+                                        {% for item in s %}
+                                            <option value="{{ item.id }}">{{ item.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">选择分区</label>
+
+                            <div class="col-sm-10 merge_zones" id="zone_list">
+                                {% for zone in zones %}
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" value="{{ zone.id }}"
+                                           id="id_zones_{{ zone.id }}" name="zones"> {{ zone.name }}
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">功能选项</label>
+                            <input type="button" value="全选" class="btn btn-default btn-xs" id="selectAll">
+                            <input type="button" value="全不选" class="btn btn-default btn-xs" id="unSelect">
+                            <input type="button" value="反选" class="btn btn-default btn-xs" id="reverse">
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group"><label class="col-sm-2 control-label">使用路径拼接<br/>
+                            <small class="text-navy">比如: pxqb_login_s2001</small></label>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="id_use_zone" name="use_zone">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">选择对应仓库</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" id="id_repository_name" name="repository_name">
+                                        <option value="">--------------------</option>
+                                        {% for item in repo_object %}
+                                            <option value="{{ item.id }}">{{ item.repo_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                        </div>
+
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">部署路径</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" id="id_deploy_path" name="deploy_path">
+                                        <option value="">--------------------</option>
+                                        {% for item in path_object %}
+                                            <option value="{{ item.id }}">{{ item.path_value }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">更新说明</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="3" id="id_content" name="content"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="hidden" maxlength="20" id="id_client" name="client" value="local">
+                            <input type="hidden" maxlength="100" id="id_fun" name="fun" value="cmd.run">
+                            <input type="hidden" maxlength="100" id="id_commands" name="commands"
+                                   value="sh /data/agent_scripts/upgrade_code.sh">
+                            <input id="id_operate" maxlength="20" name="operate" type="hidden" />
+                            <input id="id_status" name="status" type="hidden" />
+                            <input id="id_context" maxlength="2000" name="context" type="hidden" />
+                        </div>
+
+                         <div class="hr-line-dashed"></div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white" type="submit">取消</button>
+                                <button class="btn btn-primary" type="submit">执行</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content2 %}
+    <script>
+        $("#selectAll").click(function () {
+            $("#zone_list :checkbox,#all").prop("checked", true);
+        });
+
+        $("#unSelect").click(function () {
+            $("#zone_list :checkbox,#all").prop("checked", false);
+        });
+
+        $("#reverse").click(function () {
+            $("#zone_list :checkbox").each(function () {
+                $(this).prop("checked", !$(this).prop("checked"));
+            });
+            allchk();
+        });
+
+    function allchk(){
+        var chknum = $("#zone_list :checkbox").size();               //选项总个数
+        var chk = 0;
+        $("#zone_list :checkbox").each(function () {
+            if($(this).prop("checked")==true){
+                chk++;
+            }
+        });
+        if(chknum==chk){                                        //全选
+            $("#all").prop("checked",true);
+        }else{                                                  //不全选
+            $("#all").prop("checked",false);
+        }
+    }
+
+    </script>
+{% endblock %}
+
+

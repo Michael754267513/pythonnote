@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>开服详情</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li class="{{ var7 }}">
+                    <strong><a href="{% url 'salt_key_manager' %}">SaltStack</a></strong>
+                </li>
+                <li class="{{ var7 }}">
+                    <strong>开服详情</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+                                        <h2>开服详情</h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt>
+                                        {% if details.status %}
+                                            <dd><span class="label label-primary">成功</span></dd>
+                                        {% else %}
+                                            <dd><span class="label label-danger">失败</span></dd>
+                                        {% endif %}
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <dl class="dl-horizontal">
+                                        <dt>业务组:</dt> <dd>{{ details.s.name }}</dd>
+                                        <dt>开服区号:</dt><dd>{{ details.zones.name }}</dd>
+                                        <dt>数据服:</dt><dd>{{ details.data_server }}</dd>
+                                        <dt>聊天服:</dt><dd>{{ details.chat_server }}</dd>
+                                        <dt>web服:</dt><dd>{{ details.web_server }}</dd>
+                                        <dt>目标路径:</dt><dd>{{ details.deploy_path }}</dd>
+                                        <dt>公司:</dt> <dd><a href="#" class="text-navy"> Leshu Company</a> </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-lg-7" id="cluster_info">
+                                    <dl class="dl-horizontal" >
+
+                                        <dt>操作时间:</dt> <dd>{{ details.timestamp | date:'Y-m-d H:i:s' }}</dd>
+                                        <dt>操作用户:</dt> <dd>{{ details.operate }}</dd>
+                                    </dl>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <dl class="dl-horizontal">
+                                            <dt>执行模块:</dt>
+                                            <br>
+                                            <dd>
+                                                <p>git.clone</p>
+                                                <p>cp.get_dir</p>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="wrapper wrapper-content project-manager">
+                    <h4>更新说明</h4>
+                    <p class="small">
+                        此页面为部署详情页，为破晓奇兵项目，定制化菜单，不具有通用性！ 新区区号：{{ details.zones.name }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content result">
+                            <h2>执行结果:</h2>
+                            <p>
+                                开服过程执行结果详细如下:
+                            </p>
+                            <pre id="terminal_code">{{ details.context }}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block content2 %}
+    <script>
+        var terminal_code = document.getElementById('terminal_code'),
+            codeList = eval("[" + terminal_code.innerHTML + "]")[0];
+        console.log(codeList);
+        var codeHtml = "";
+        for(var i in codeList){
+            codeHtml += i + "<br>" + "<p style='padding-left:10px'>" + codeList[i].replace('\n      ','<br>') + "</p>";
+        }
+        terminal_code.innerHTML = codeHtml;
+    </script>
+{% endblock %}

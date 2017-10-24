@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>添加仓库</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'repository_list' %}">仓库管理</a>
+                </li>
+
+                <li class="{{ var6 }}">
+                    <strong>添加仓库</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>添加仓库</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal">{% csrf_token %}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">仓库名</label>
+
+                            <div class="col-sm-10">
+                                <input id="id_repo_name" name="repo_name" type="text" class="form-control"
+                                       value="{{ repository.repo_name }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">仓库地址</label>
+                            <div class="col-sm-10">
+                                <input id="id_repo_address" name="repo_address" type="text" class="form-control"
+                                       value="{{ repository.repo_address }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">仓库用户</label>
+                            <div class="col-sm-10">
+                                <input id="id_repo_user" name="repo_user" type="text" class="form-control"
+                                       value="{{ repository.repo_user }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">仓库密码</label>
+                            <div class="col-sm-10">
+                                    <input id="id_repo_pass" name="repo_pass" type="text" class="form-control"
+                                           value="{{ repository.repo_pass }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">仓库标识</label>
+                            <div class="col-sm-10">
+                                    <input id="id_repo_tag" name="repo_tag" type="text" class="form-control"
+                                           value="{{ repository.repo_tag }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">仓库类型</label>
+                                <div class="col-sm-10">
+                                    <label>
+                                        <select class="form-control m-b" id="id_repo_type" name="repo_type">
+                                            {% if repository.get_repo_type_display == 'git' %}
+                                                <option value="1" selected>git</option>
+                                            {% elif repository.get_repo_type_display == 'svn' %}
+                                                <option value="2" selected>svn</option>
+                                            {% else %}
+                                                <option value="0">-------------请选择--------------</option>
+                                                <option value="1">git</option>
+                                                <option value="2">svn</option>
+                                            {% endif %}
+                                        </select>
+                                    </label>
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">传输协议</label>
+                                <div class="col-sm-10">
+                                    <label>
+                                        <select class="form-control m-b" id="id_repo_protocol" name="repo_protocol">
+                                            {% if repository.get_repo_protocol_display == 'ssh' %}
+                                                <option value="1" selected>ssh</option>
+                                            {% elif repository.get_repo_protocol_display == 'http' %}
+                                                <option value="2" selected>http</option>
+                                            {% elif repository.get_repo_protocol_display == 'https' %}
+                                                <option value="3" selected>https</option>
+                                            {% else %}
+                                                <option value="0">-------------请选择--------------</option>
+                                                <option value="1">ssh</option>
+                                                <option value="2">http</option>
+                                                <option value="3">https</option>
+                                            {% endif %}
+                                        </select>
+                                    </label>
+                                </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white" type="submit">取消</button>
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
