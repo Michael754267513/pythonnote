@@ -38,6 +38,6 @@ def polyfit(X, Y, degree):
     SST = np.sum((Y - ybar) ** 2)
     SSE = np.sum((Y - yhat) ** 2)
     rSquare = SSR / SST
-    return  rSquare
+    return rSquare
 
 print("R平方：" + str(polyfit(testX, testY, 1)))
